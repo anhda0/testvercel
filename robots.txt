@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vananh2002.vercel.app/sitemap.xml
