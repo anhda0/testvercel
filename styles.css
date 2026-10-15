@@ -47,7 +47,8 @@ img { display: block; max-width: 100%; }
   justify-content: space-between;
   height: 96px;
 }
-.logo { font-size: 20px; font-weight: 500; }
+.logo { display: inline-flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 500; }
+.logo img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
 .nav { display: flex; align-items: center; gap: 34px; font-size: 20px; white-space: nowrap; }
 .nav a { transition: color 0.2s; }
 .nav a:hover { color: var(--link); }
@@ -186,7 +187,8 @@ img { display: block; max-width: 100%; }
 
 /* ---------- Footer ---------- */
 .site-footer { text-align: center; padding: 40px 0 46px; }
-.site-footer .logo { display: block; font-size: 24px; margin-bottom: 18px; }
+.site-footer .logo { flex-direction: column; gap: 10px; font-size: 24px; margin-bottom: 18px; }
+.site-footer .logo img { width: 64px; height: 64px; }
 .site-footer .socials { justify-content: center; margin-bottom: 20px; }
 .site-footer small { color: var(--muted); font-size: 18px; }
 
@@ -196,6 +198,7 @@ img { display: block; max-width: 100%; }
 }
 @media (max-width: 860px) {
   .site-header .container { height: 68px; }
+  .site-header .logo img { width: 36px; height: 36px; }
   .menu-btn { display: inline-flex; }
   .nav {
     display: none;
