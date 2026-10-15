@@ -1,7 +1,7 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/bai-viet/:slug", "destination": "/bai-viet.html" }
+    { "source": "/bai-viet/:slug", "destination": "/bai-viet" }
   ],
   "redirects": [
     { "source": "/copywriting-101-4", "destination": "/bai-viet/copywriting-101-4-xu-ly-su-tu-choi", "permanent": true }
