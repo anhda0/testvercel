@@ -47,7 +47,7 @@ img { display: block; max-width: 100%; }
   justify-content: space-between;
   height: 96px;
 }
-.logo { display: inline-flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 500; }
+.logo { display: inline-flex; white-space: nowrap; align-items: center; gap: 12px; font-size: 20px; font-weight: 500; }
 .logo img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
 .nav { display: flex; align-items: center; gap: 34px; font-size: 20px; white-space: nowrap; }
 .nav a { transition: color 0.2s; }
@@ -196,7 +196,8 @@ img { display: block; max-width: 100%; }
 @media (max-width: 1100px) {
   .wide { padding: 0 32px; }
 }
-@media (max-width: 860px) {
+/* Menu thu thành nút ☰ khi không đủ chỗ cho cả hàng */
+@media (max-width: 1060px) {
   .site-header .container { height: 68px; }
   .site-header .logo img { width: 36px; height: 36px; }
   .menu-btn { display: inline-flex; }
@@ -215,6 +216,8 @@ img { display: block; max-width: 100%; }
     font-size: 18px;
   }
   .nav.open { display: flex; }
+}
+@media (max-width: 860px) {
 
   .post { flex-direction: column; gap: 14px; }
   .post .thumb { flex: none; width: 100%; height: auto; aspect-ratio: 245 / 160; }

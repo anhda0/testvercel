@@ -108,3 +108,9 @@ function courseLessons(course, posts) {
     .filter(Boolean)
     .sort((a, b) => a.number - b.number);
 }
+
+// Bài thuộc một dự án ở trang "Mình làm" (tiêu đề chứa từ khóa trong projects.js)
+function isProjectPost(post) {
+  const title = post.title.toLowerCase();
+  return (window.PROJECTS || []).some((project) => title.includes(project.keyword.toLowerCase()));
+}
