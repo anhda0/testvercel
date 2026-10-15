@@ -22,14 +22,15 @@ document.querySelectorAll('.subscribe form').forEach((form) => {
   });
 });
 
-// Hiện dần khi cuộn tới
+// Hiện dần khi cuộn tới: khi mép trên của khối vào tới 90% chiều cao màn hình.
+// Không dùng tỉ lệ diện tích, vì khối dài (như nội dung bài viết) sẽ không bao giờ đủ tỉ lệ trên điện thoại.
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add('visible');
     revealObserver.unobserve(entry.target);
   });
-}, { threshold: 0.15 });
+}, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
 function observeReveal(root = document) {
   root.querySelectorAll('.reveal:not(.visible)').forEach((el) => revealObserver.observe(el));
 }

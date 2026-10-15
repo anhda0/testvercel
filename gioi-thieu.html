@@ -152,7 +152,7 @@
           entry.target.querySelectorAll('.count').forEach(countUp);
           counter.unobserve(entry.target);
         });
-      }, { threshold: 0.3 });
+      }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
       counter.observe(document.querySelector('.paper'));
     }
   </script>
