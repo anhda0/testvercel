@@ -201,12 +201,15 @@
       observeReveal(el);
     }
 
-    // Latest: các bài còn lại của chủ đề, nối tiếp phần nổi bật (không lặp lại).
+    // Latest: các bài còn lại của chủ đề, nối tiếp phần nổi bật (không lặp lại);
+    //         chủ đề chưa có bài nào ngoài phần nổi bật thì hiện tất cả bài để danh sách không trống.
     // Top: bảng xếp hạng mọi bài của chủ đề theo lượt thích + bình luận trên Substack.
     function renderList() {
+      const all = categoryPosts();
+      const rest = all.slice(FEATURED_COUNT);
       const posts = sort === 'latest'
-        ? categoryPosts().slice(FEATURED_COUNT)
-        : categoryPosts().sort((a, b) => b.score - a.score);
+        ? (rest.length ? rest : all)
+        : all.sort((a, b) => b.score - a.score);
       const el = document.getElementById('list');
       el.innerHTML = posts.length
         ? posts.slice(0, shown).map(postItemHtml).join('')
