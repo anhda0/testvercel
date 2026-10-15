@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Học cùng mình | Van Anh Dao</title>
+  <meta name="description" content="Các bài viết của Vân Anh về marketing, product và phát triển bản thân, tổng hợp theo chủ đề.">
+  <meta name="author" content="Van Anh Dao">
+  <link rel="canonical" href="https://vananh2002.vercel.app/hoc-cung-minh">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:site_name" content="Vân Anh">
+  <meta property="og:title" content="Học cùng mình | Van Anh Dao">
+  <meta property="og:description" content="Các bài viết của Vân Anh về marketing, product và phát triển bản thân, tổng hợp theo chủ đề.">
+  <meta property="og:url" content="https://vananh2002.vercel.app/hoc-cung-minh">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .learn { padding-top: 36px; padding-bottom: 80px; }
+
+    /* ---------- Bài nổi bật theo chủ đề ---------- */
+    .featured {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px 18px;
+      margin: 20px 0 52px;
+    }
+    .featured .empty { grid-column: 1 / -1; margin: 0; }
+
+    .feat-main {
+      grid-column: span 2;
+      position: relative;
+      min-height: 260px;
+      border-radius: 6px;
+      overflow: hidden;
+      color: #fff;
+      background: linear-gradient(135deg, var(--navy), #2a6aa3);
+    }
+    .feat-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .feat-main:hover img { transform: scale(1.04); }
+    .feat-main::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(100deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1));
+    }
+    .feat-main .body { position: relative; z-index: 1; padding: 30px 34px; max-width: 420px; }
+    .feat-main h3 { font-size: 26px; font-weight: 600; line-height: 1.2; margin: 0 0 14px; }
+    .feat-main p { font-size: 15px; line-height: 1.75; margin: 0 0 10px; }
+    .feat-main time { font-size: 12px; }
+
+    .feat-item .thumb { aspect-ratio: 248 / 162; }
+    .feat-item h3 { font-size: 20px; font-weight: 600; line-height: 1.2; margin: 14px 0 8px; transition: color 0.2s; }
+    .feat-item:hover h3 { color: var(--link); }
+    .feat-item time { color: var(--muted); font-size: 12px; }
+
+    .clamp {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+    }
+
+    /* ---------- Latest / Top ---------- */
+    #list { margin-top: 26px; }
+    #list .post p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+
+    @media (max-width: 860px) {
+      .featured { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .featured { grid-template-columns: 1fr; }
+      .featured { gap: 18px; }
+      .feat-main { grid-column: auto; }
+      .feat-item { display: grid; grid-template-columns: 120px 1fr; column-gap: 14px; align-items: start; }
+      .feat-item .thumb { grid-row: span 2; }
+      .feat-item h3 { font-size: 16px; margin: 0 0 6px; }
+      .feat-main .body { padding: 24px; }
+      .feat-main h3 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Icon dùng chung -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3L10 15z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 3h-3.3v12.2a2.8 2.8 0 1 1-2-2.7V9.1a6.2 6.2 0 1 0 5.3 6.1V9a7.8 7.8 0 0 0 4.4 1.4V7.1A4.4 4.4 0 0 1 16.6 3z"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="container wide">
+      <a class="logo" href="/">Van Anh Dao</a>
+      <button class="icon-btn menu-btn" aria-label="Mở menu" aria-expanded="false" aria-controls="nav">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="/">Trang chủ</a>
+        <a href="/#bat-dau">Bắt đầu ở đây</a>
+        <a href="/hoc-cung-minh">Học cùng mình</a>
+        <a href="/minh-lam">Mình làm</a>
+        <a href="/gioi-thieu">Mình là ai?</a>
+        <button class="icon-btn" aria-label="Tìm kiếm">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.5-4.5"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="learn narrow">
+    <div class="tabs" role="tablist" aria-label="Chủ đề" id="cat-tabs">
+      <button class="tab" role="tab" data-cat="marketing">Marketing</button>
+      <button class="tab" role="tab" data-cat="product">Product</button>
+      <button class="tab" role="tab" data-cat="self-development">Self-development</button>
+    </div>
+    <div class="featured" id="featured" role="tabpanel"></div>
+
+    <div class="tabs" role="tablist" aria-label="Sắp xếp" id="sort-tabs">
+      <button class="tab" role="tab" data-sort="latest">Latest</button>
+      <button class="tab" role="tab" data-sort="top">Top</button>
+    </div>
+    <div id="list" role="tabpanel"></div>
+    <button class="more" id="more" hidden>
+      Xem thêm
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+    </button>
+  </main>
+
+  <section class="subscribe">
+      <div class="container wide">
+        <div>
+          <h2>Để không bỏ lỡ thông tin mới nhất từ mình!</h2>
+          <p>Khi nào có bài viết hoặc video mới (siêu hay), mình sẽ gửi đến bạn trước tiên</p>
+        </div>
+        <form>
+          <input type="text" name="name" placeholder="Tên của bạn" aria-label="Tên của bạn" required>
+          <input type="email" name="email" placeholder="Email" aria-label="Email" required>
+          <button type="submit">Đăng ký</button>
+        </form>
+      </div>
+  </section>
+
+  <footer class="site-footer">
+    <a class="logo" href="/">Van Anh Dao</a>
+    <div class="socials">
+      <a href="#" aria-label="Facebook"><svg width="22" height="22"><use href="#i-facebook"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg width="22" height="22"><use href="#i-youtube"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg width="20" height="20"><use href="#i-instagram"/></svg></a>
+      <a href="#" aria-label="TikTok"><svg width="20" height="20"><use href="#i-tiktok"/></svg></a>
+    </div>
+    <small>Copyright © 2025 Van Anh Dao</small>
+  </footer>
+
+  <script src="/posts.js"></script>
+  <script src="/site.js"></script>
+  <script>
+    const PAGE_SIZE = 6;
+    let category = ['marketing', 'product', 'self-development'].includes(location.hash.slice(1))
+      ? location.hash.slice(1) : 'marketing';
+    let sort = 'latest';
+    let shown = PAGE_SIZE;
+
+    function selectTab(group, attr, value) {
+      group.querySelectorAll('.tab').forEach((t) => t.setAttribute('aria-selected', t.dataset[attr] === value));
+    }
+
+    // 1 bài lớn + tối đa 4 bài nhỏ mới nhất của chủ đề đang chọn
+    function renderFeatured() {
+      const posts = latestPosts().filter((p) => p.category === category).slice(0, 5);
+      const el = document.getElementById('featured');
+      if (!posts.length) {
+        el.innerHTML = '<p class="empty">Chưa có bài viết nào trong mục này, bạn quay lại sau nha!</p>';
+        return;
+      }
+      const [main, ...rest] = posts;
+      el.innerHTML = `
+        <a class="feat-main reveal" href="${escapeHtml(main.url)}">
+          ${main.image ? `<img src="${escapeHtml(main.image)}" alt="">` : ''}
+          <div class="body">
+            <h3>${escapeHtml(main.title)}</h3>
+            <p class="clamp">${escapeHtml(main.excerpt)}</p>
+            <time datetime="${main.date}">${timeAgo(main.date)}</time>
+          </div>
+        </a>` + rest.map((p) => `
+        <a class="feat-item reveal" href="${escapeHtml(p.url)}">
+          ${thumbHtml(p, 'thumb')}
+          <h3>${escapeHtml(p.title)}</h3>
+          <time datetime="${p.date}">${timeAgo(p.date)}</time>
+        </a>`).join('');
+      observeReveal(el);
+    }
+
+    // Tất cả bài viết, sắp theo ngày (Latest) hoặc theo thứ hạng tự đặt (Top)
+    function renderList() {
+      const posts = sort === 'latest'
+        ? latestPosts()
+        : window.POSTS.filter((p) => p.top).sort((a, b) => a.top - b.top);
+      const el = document.getElementById('list');
+      el.innerHTML = posts.length
+        ? posts.slice(0, shown).map(postItemHtml).join('')
+        : '<p class="empty">Chưa có bài viết nào.</p>';
+      document.getElementById('more').hidden = shown >= posts.length;
+      observeReveal(el);
+    }
+
+    document.getElementById('cat-tabs').addEventListener('click', (e) => {
+      const tab = e.target.closest('.tab');
+      if (!tab) return;
+      category = tab.dataset.cat;
+      history.replaceState(null, '', '#' + category);
+      selectTab(e.currentTarget, 'cat', category);
+      renderFeatured();
+    });
+    document.getElementById('sort-tabs').addEventListener('click', (e) => {
+      const tab = e.target.closest('.tab');
+      if (!tab) return;
+      sort = tab.dataset.sort;
+      shown = PAGE_SIZE;
+      selectTab(e.currentTarget, 'sort', sort);
+      renderList();
+    });
+    document.getElementById('more').addEventListener('click', () => {
+      shown += PAGE_SIZE;
+      renderList();
+    });
+
+    selectTab(document.getElementById('cat-tabs'), 'cat', category);
+    selectTab(document.getElementById('sort-tabs'), 'sort', sort);
+    renderFeatured();
+    renderList();
+  </script>
+</body>
+</html>

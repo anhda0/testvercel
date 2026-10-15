@@ -3,194 +3,182 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vân Anh | Marketing Fintech</title>
-  <meta name="description" content="Vân Anh: 3 năm làm Marketing trong lĩnh vực Fintech, đồng sáng lập HUBwarts Agency. Chia sẻ về copywriting và marketing.">
+  <title>Van Anh Dao | Marketing, Product &amp; Copywriting</title>
+  <meta name="description" content="Blog của Vân Anh: chia sẻ những điều mình học được về marketing, product, copywriting và phát triển bản thân.">
+  <meta name="author" content="Van Anh Dao">
   <link rel="canonical" href="https://vananh2002.vercel.app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:site_name" content="Vân Anh">
+  <meta property="og:title" content="Van Anh Dao | Marketing, Product &amp; Copywriting">
+  <meta property="og:description" content="Blog của Vân Anh: chia sẻ những điều mình học được về marketing, product, copywriting và phát triển bản thân.">
+  <meta property="og:url" content="https://vananh2002.vercel.app/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
   <style>
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      max-width: 720px;
-      margin: 40px auto;
-      padding: 0 16px;
-      line-height: 1.6;
-      color: #222;
+    /* ---------- Hero ---------- */
+    .hero {
+      display: flex;
+      gap: 50px;
+      align-items: flex-start;
+      padding-top: 60px;
+      padding-bottom: 72px;
     }
-    h2 { margin-top: 32px; }
-    a { color: #4f46e5; }
+    .hero .avatar { flex: 0 0 264px; height: 290px; border-radius: 8px; }
+    .hero h1 { font-size: 30px; font-weight: 400; margin: 0 0 20px; }
+    .hero p { font-size: 18px; margin: 0 0 22px; max-width: 540px; }
 
-    /* Tiêu đề: chữ gradient chuyển màu */
-    h1 .name {
-      background: linear-gradient(90deg, #4f46e5, #ec4899, #f59e0b, #4f46e5);
-      background-size: 300% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: shine 6s linear infinite;
+    /* ---------- Bạn đang tìm kiếm điều gì? ---------- */
+    .explore { background: var(--navy); color: #fff; padding: 52px 0 64px; }
+    .explore h2 { text-align: center; font-size: 34px; font-weight: 700; margin: 0 0 40px; }
+    .explore .container { max-width: 1440px; padding: 0 92px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 98px; }
+    .card {
+      background: var(--white);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 26px 28px 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    @keyframes shine {
-      to { background-position: 300% 0; }
-    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); }
+    .card svg { color: var(--navy); }
+    .card h3 { font-size: 22px; font-weight: 600; margin: 14px 0 16px; color: #333; }
+    .card p { font-size: 16px; line-height: 1.7; margin: 0; }
 
-    /* Emoji nhún nhảy */
-    .emoji {
-      display: inline-block;
-      animation: bounce 1.8s ease-in-out infinite;
-      transform-origin: 50% 100%;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0) rotate(0); }
-      25% { transform: translateY(-6px) rotate(-10deg); }
-      50% { transform: translateY(0) rotate(0); }
-      75% { transform: translateY(-3px) rotate(10deg); }
-    }
+    /* ---------- Bài viết mới nhất ---------- */
+    .posts { padding: 60px 0 80px; }
+    .posts h2 { font-size: 28px; font-weight: 600; margin: 0 0 30px; }
 
-    /* Header hiện dần khi tải trang */
-    header > * {
-      opacity: 0;
-      animation: fadeUp 0.7s ease-out forwards;
+    @media (max-width: 1100px) {
+      .explore .container { padding: 0 32px; }
+      .cards { gap: 28px; }
     }
-    header > *:nth-child(2) { animation-delay: 0.2s; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media (max-width: 860px) {
+      .hero { flex-direction: column; gap: 28px; padding-top: 36px; }
+      .hero .avatar { flex: none; width: 100%; max-width: 320px; height: 340px; }
+      .cards { grid-template-columns: 1fr; }
+      .explore h2 { font-size: 26px; }
     }
-
-    /* Các section hiện ra khi cuộn tới */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Gạch chân h2 chạy ra khi section hiện */
-    h2 {
-      position: relative;
-      display: inline-block;
-    }
-    h2::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      height: 3px;
-      width: 0;
-      background: linear-gradient(90deg, #4f46e5, #ec4899);
-      border-radius: 2px;
-      transition: width 0.8s ease-out 0.3s;
-    }
-    .reveal.visible h2::after { width: 100%; }
-
-    /* Danh sách: từng dòng trượt vào + hover */
-    li {
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out, color 0.2s;
-    }
-    .reveal.visible li { opacity: 1; transform: translateX(0); }
-    .reveal.visible li:nth-child(1) { transition-delay: 0.3s, 0.3s, 0s; }
-    .reveal.visible li:nth-child(2) { transition-delay: 0.45s, 0.45s, 0s; }
-    li:hover { color: #4f46e5; }
-
-    /* Số đếm nổi bật */
-    .count {
-      font-weight: 700;
-      color: #ec4899;
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Link: gạch chân trượt khi hover */
-    a {
-      text-decoration: none;
-      background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 2px;
-      transition: background-size 0.3s ease;
-    }
-    a:hover { background-size: 100% 2px; }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-      header > *, .reveal, li { opacity: 1 !important; transform: none !important; }
-      h2::after { width: 100% !important; }
+    @media (max-width: 480px) {
+      .explore .container { padding-left: 16px; padding-right: 16px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Hê lô, mình là <span class="name">Vân Anh</span> <span class="emoji">😍</span></h1>
-    <p>Marketing Fintech · Gen Z thích khám phá và xông pha</p>
+  <!-- Icon dùng chung -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3L10 15z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 3h-3.3v12.2a2.8 2.8 0 1 1-2-2.7V9.1a6.2 6.2 0 1 0 5.3 6.1V9a7.8 7.8 0 0 0 4.4 1.4V7.1A4.4 4.4 0 0 1 16.6 3z"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="container wide">
+      <a class="logo" href="/">Van Anh Dao</a>
+      <button class="icon-btn menu-btn" aria-label="Mở menu" aria-expanded="false" aria-controls="nav">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="/">Trang chủ</a>
+        <a href="#bat-dau">Bắt đầu ở đây</a>
+        <a href="/hoc-cung-minh">Học cùng mình</a>
+        <a href="/minh-lam">Mình làm</a>
+        <a href="/gioi-thieu">Mình là ai?</a>
+        <button class="icon-btn" aria-label="Tìm kiếm">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.5-4.5"/></svg>
+        </button>
+      </nav>
+    </div>
   </header>
 
-  <section class="reveal">
-    <h2>Về mình</h2>
-    <p>
-      Mình bắt đầu đi làm từ cuối năm 2 đại học, chính xác là ngày 15/06/2022, với vị trí
-      Thực tập sinh Marketing tại Simplize. Đến nay, mình đã có 3 năm kinh nghiệm làm
-      Marketing trong lĩnh vực Fintech.
-    </p>
-  </section>
+  <main>
+    <section class="hero narrow">
+      <div class="avatar ph" role="img" aria-label="Ảnh Vân Anh"></div>
+      <div>
+        <h1>Chào bạn!</h1>
+        <p>Mình là Vân Anh, rất vui vì bạn đã ghé thăm thế giới nhỏ của mình.</p>
+        <p>Tại đây, mình muốn chia sẻ những điều mình đã học được tới những người cần nó.</p>
+        <p>Nơi bạn có thể tìm thấy mình...</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg width="22" height="22"><use href="#i-facebook"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="22" height="22"><use href="#i-youtube"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="20" height="20"><use href="#i-instagram"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg width="20" height="20"><use href="#i-tiktok"/></svg></a>
+        </div>
+      </div>
+    </section>
 
-  <section class="reveal">
-    <h2>Dự án cộng đồng: HUBwarts Agency</h2>
-    <p>
-      Cùng một vài người bạn, người chị, mình đã xây dựng nên HUBwarts Agency, một dự án cộng đồng
-      có sức ảnh hưởng và thu hút lượt tương tác số 1 tại Đại học Ngân hàng TP.HCM (HUB).
-    </p>
-    <ul>
-      <li>HUBwarts, Học viện phép thuật HUB: <span class="count" data-target="22500">22,500</span>+ người theo dõi</li>
-      <li>Động HUB, cộng đồng sinh viên Ngân hàng: <span class="count" data-target="47600">47,600</span>+ thành viên</li>
-    </ul>
-  </section>
+    <section class="explore" id="bat-dau">
+      <div class="container">
+        <h2>Bạn đang tìm kiếm điều gì?</h2>
+        <div class="cards">
+          <a class="card reveal" href="/hoc-cung-minh">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <h3>Mini-courses</h3>
+            <p>Các khóa học nhỏ do mình thiết kế: cách làm marketing, product, kỹ năng đi làm,...</p>
+          </a>
+          <a class="card reveal" href="/hoc-cung-minh#self-development">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="3.5" r="2"/><path d="M5 5.5c0-.6.6-1 1.1-.7l3.6 2.2h4.6l3.6-2.2c.5-.3 1.1.1 1.1.7 0 .3-.1.5-.4.7L14.5 9v4l1.8 7.8a1 1 0 0 1-1.9.5L12 15.5l-2.4 5.8a1 1 0 0 1-1.9-.5L9.5 13V9L5.4 6.2a.8.8 0 0 1-.4-.7z"/></svg>
+            <h3>Self-development</h3>
+            <p>Tổng hợp các bài viết về làm marketing, product, phát triển bản thân, đi làm,...</p>
+          </a>
+          <a class="card reveal" href="/gioi-thieu">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M5.5 9h13"/><path fill="currentColor" d="M6.5 9h4l-.5 2.2a1.8 1.8 0 0 1-3.4 0L6.5 9zm7 0h4l-.1 2.2a1.8 1.8 0 0 1-3.4 0L13.5 9z"/><path d="M8.5 15.5a5 5 0 0 0 7 0"/></svg>
+            <h3>Mình là ai?</h3>
+            <p>Hi bạn mới, mình có thể bắt đầu làm quen ở đây nha</p>
+          </a>
+        </div>
+      </div>
+    </section>
 
-  <section class="reveal">
-    <h2>Fun fact</h2>
-    <p>Do mình tạch hết CLB nên cuộc đời đã đẩy mình đi làm sớm và có cái dự án này.</p>
-  </section>
+    <section class="posts narrow" id="bai-viet">
+      <h2>Bài viết mới nhất</h2>
 
-  <section class="reveal">
-    <h2>Bài viết</h2>
-    <ul>
-      <li><a href="/copywriting-101-4">Copywriting 101 #4: Xử lý sự từ chối</a></li>
-    </ul>
-  </section>
+      <div id="latest"></div>
 
-  <section class="reveal">
-    <h2>Liên hệ</h2>
-    <p>Email: <a href="mailto:anhdtv.2002@gmail.com">anhdtv.2002@gmail.com</a></p>
-  </section>
+      <a class="more" href="/hoc-cung-minh">
+        Xem thêm
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+      </a>
+    </section>
 
+    <section class="subscribe">
+      <div class="container wide">
+        <div>
+          <h2>Để không bỏ lỡ thông tin mới nhất từ mình!</h2>
+          <p>Khi nào có bài viết hoặc video mới (siêu hay), mình sẽ gửi đến bạn trước tiên</p>
+        </div>
+        <form>
+          <input type="text" name="name" placeholder="Tên của bạn" aria-label="Tên của bạn" required>
+          <input type="email" name="email" placeholder="Email" aria-label="Email" required>
+          <button type="submit">Đăng ký</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="logo" href="/">Van Anh Dao</a>
+    <div class="socials">
+      <a href="#" aria-label="Facebook"><svg width="22" height="22"><use href="#i-facebook"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg width="22" height="22"><use href="#i-youtube"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg width="20" height="20"><use href="#i-instagram"/></svg></a>
+      <a href="#" aria-label="TikTok"><svg width="20" height="20"><use href="#i-tiktok"/></svg></a>
+    </div>
+    <small>Copyright © 2025 Van Anh Dao</small>
+  </footer>
+
+  <script src="/posts.js"></script>
+  <script src="/site.js"></script>
   <script>
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Đếm số từ 0 lên giá trị thật
-    function countUp(el) {
-      const target = +el.dataset.target;
-      const duration = 1500;
-      const start = performance.now();
-      function tick(now) {
-        const p = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(target * eased).toLocaleString('en-US');
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        if (!reduceMotion) entry.target.querySelectorAll('.count').forEach(countUp);
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    document.getElementById('latest').innerHTML = latestPosts().slice(0, 4).map(postItemHtml).join('');
+    observeReveal();
   </script>
 </body>
 </html>

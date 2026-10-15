@@ -29,317 +29,269 @@
     "mainEntityOfPage": "https://vananh2002.vercel.app/copywriting-101-4"
   }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
   <style>
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      max-width: 720px;
-      margin: 40px auto;
-      padding: 0 16px;
-      line-height: 1.7;
-      color: #222;
-    }
-    h2 { margin-top: 40px; }
-    a { color: #4f46e5; }
+    .article { padding-top: 56px; padding-bottom: 120px; }
+    .article-head { text-align: center; max-width: 600px; margin: 0 auto 40px; }
+    .article-head h1 { font-size: 40px; font-weight: 600; line-height: 1.22; margin: 0 0 10px; }
+    .article-head time { font-size: 18px; }
 
-    .back { font-size: 0.95rem; }
-    .meta { color: #666; font-size: 0.95rem; margin-top: -8px; }
-    .series {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: #ec4899;
-      margin-top: 24px;
-    }
-
-    /* Tiêu đề: chữ gradient chuyển màu */
-    h1 .hl {
-      background: linear-gradient(90deg, #4f46e5, #ec4899, #f59e0b, #4f46e5);
-      background-size: 300% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: shine 6s linear infinite;
-    }
-    @keyframes shine {
-      to { background-position: 300% 0; }
-    }
-
-    /* Header hiện dần khi tải trang */
-    header > * {
-      opacity: 0;
-      animation: fadeUp 0.7s ease-out forwards;
-    }
-    header > *:nth-child(2) { animation-delay: 0.1s; }
-    header > *:nth-child(3) { animation-delay: 0.2s; }
-    header > *:nth-child(4) { animation-delay: 0.3s; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Các phần hiện ra khi cuộn tới */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Gạch chân h2 chạy ra khi phần đó hiện */
-    h2 {
-      position: relative;
-      display: inline-block;
-    }
-    h2::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      height: 3px;
-      width: 0;
-      background: linear-gradient(90deg, #4f46e5, #ec4899);
-      border-radius: 2px;
-      transition: width 0.8s ease-out 0.3s;
-    }
-    .reveal.visible h2::after { width: 100%; }
-
+    /* Nội dung bài */
+    .paper h2 { font-size: 24px; font-weight: 600; line-height: 1.3; margin: 0 0 20px; }
     .callout {
-      border-left: 4px solid #4f46e5;
-      background: #f5f5ff;
-      padding: 12px 16px;
-      border-radius: 0 8px 8px 0;
+      border-left: 4px solid var(--navy);
+      background: var(--link-bg);
+      padding: 12px 18px;
+      border-radius: 0 6px 6px 0;
       font-weight: 600;
     }
-
-    /* Danh sách lời từ chối: từng dòng trượt vào */
-    .objections li {
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    .objections li + li { margin-top: 6px; }
+    .paper .card {
+      border: 1px solid #dfe5ec;
+      border-radius: 6px;
+      padding: 18px 22px;
+      margin: 0 0 18px;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .reveal.visible .objections li { opacity: 1; transform: translateX(0); }
-    .reveal.visible .objections li:nth-child(2) { transition-delay: 0.1s; }
-    .reveal.visible .objections li:nth-child(3) { transition-delay: 0.2s; }
-    .reveal.visible .objections li:nth-child(4) { transition-delay: 0.3s; }
-    .reveal.visible .objections li:nth-child(5) { transition-delay: 0.4s; }
-
-    /* Thẻ lời từ chối + cách hóa giải */
-    .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin: 16px 0;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.12);
-      border-color: #c7d2fe;
-    }
-    .card .label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #ec4899;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .card .quote {
-      font-style: italic;
-      margin: 4px 0 8px;
-      font-weight: 600;
-    }
-    .card ul { margin: 0; padding-left: 20px; }
-    .card .solve { font-size: 0.9rem; color: #4f46e5; font-weight: 600; margin: 0; }
-
-    /* 3 bước */
-    .steps {
+    .paper .card:last-child { margin-bottom: 32px; }
+    .paper .card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 59, 111, 0.12); }
+    .card .label { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--orange); }
+    .card .quote { font-style: italic; font-weight: 600; margin: 4px 0 8px; }
+    .card .solve { color: var(--link); font-weight: 600; margin: 0; }
+    .card ul { margin: 0; padding-left: 22px; }
+    .paper .steps {
       list-style: none;
-      padding: 0;
       display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 0;
     }
-    .steps li {
-      border-radius: 12px;
-      padding: 16px;
-      background: linear-gradient(135deg, #eef2ff, #fdf2f8);
-      opacity: 0;
-      transform: scale(0.9);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
-    .reveal.visible .steps li { opacity: 1; transform: scale(1); }
-    .reveal.visible .steps li:nth-child(2) { transition-delay: 0.15s; }
-    .reveal.visible .steps li:nth-child(3) { transition-delay: 0.3s; }
-    .steps .num {
-      display: block;
-      font-size: 2rem;
-      font-weight: 800;
-      line-height: 1;
-      color: #4f46e5;
-    }
+    .steps li { background: var(--link-bg); border-radius: 6px; padding: 16px 18px; font-weight: 500; line-height: 1.4; }
+    .steps .num { display: block; font-size: 32px; font-weight: 700; line-height: 1; color: var(--navy); margin-bottom: 8px; }
+    .source { font-size: 16px; color: var(--muted); border-top: 1px solid #e6eaef; padding-top: 24px; }
 
-    /* Link: gạch chân trượt khi hover */
-    a {
-      text-decoration: none;
-      background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 2px;
-      transition: background-size 0.3s ease;
+    /* Chia sẻ */
+    .share {
+      max-width: 816px;
+      margin: 46px auto 0;
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      padding: 28px 24px 30px;
+      text-align: center;
     }
-    a:hover { background-size: 100% 2px; }
+    .share h2 { font-size: 22px; font-weight: 600; margin: 0 0 14px; }
+    .share .socials { justify-content: center; gap: 14px; }
+    .share .socials a { width: 38px; height: 38px; background: #333; }
 
-    footer { margin-top: 48px; color: #666; font-size: 0.95rem; }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-      header > *, .reveal, .objections li, .steps li { opacity: 1 !important; transform: none !important; }
-      h2::after { width: 100% !important; }
+    @media (max-width: 860px) {
+      .article { padding-top: 36px; padding-bottom: 72px; }
+      .article-head h1 { font-size: 28px; }
+      .article-head time { font-size: 16px; }
+      .paper h2 { font-size: 21px; }
+      .steps { grid-template-columns: 1fr; }
+      .share { margin-top: 28px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <a class="back" href="/">← Vân Anh</a>
-    <span class="series">Copywriting 101 · #4</span>
-    <h1><span class="hl">Xử lý sự từ chối</span></h1>
-    <p class="meta">Van Anh Dao · 26/10/2025</p>
+  <!-- Icon dùng chung -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3L10 15z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 3h-3.3v12.2a2.8 2.8 0 1 1-2-2.7V9.1a6.2 6.2 0 1 0 5.3 6.1V9a7.8 7.8 0 0 0 4.4 1.4V7.1A4.4 4.4 0 0 1 16.6 3z"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="container wide">
+      <a class="logo" href="/">Van Anh Dao</a>
+      <button class="icon-btn menu-btn" aria-label="Mở menu" aria-expanded="false" aria-controls="nav">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="/">Trang chủ</a>
+        <a href="/#bat-dau">Bắt đầu ở đây</a>
+        <a href="/hoc-cung-minh">Học cùng mình</a>
+        <a href="/minh-lam">Mình làm</a>
+        <a href="/gioi-thieu">Mình là ai?</a>
+        <button class="icon-btn" aria-label="Tìm kiếm">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.5-4.5"/></svg>
+        </button>
+      </nav>
+    </div>
   </header>
 
-  <section class="reveal">
-    <p>
-      Ở bài học này, mình muốn chia sẻ với các bạn một bài học quan trọng khi bạn làm copywriting
-      đó là xây dựng niềm tin bằng cách xử lý sự từ chối.
-    </p>
-    <p>Có thể nói, đây là một trong những nhiệm vụ quan trọng nhất mà một người làm Copywriting phải làm được.</p>
-    <p>Tại sao lại như vậy?</p>
-    <p class="callout">Vì nếu bạn không xử lý được các lời từ chối, khách hàng sẽ không mua hàng của bạn.</p>
-    <p>Vậy…</p>
+  <main class="article narrow">
+    <header class="article-head reveal">
+      <h1>[Copywriting 101 #4] - Xử lý sự từ chối</h1>
+      <time datetime="2025-10-26" data-ago>26/10/2025</time>
+    </header>
+
+    <article class="paper reveal">
+      <section>
+        <p>
+          Ở bài học này, mình muốn chia sẻ với các bạn một bài học quan trọng khi bạn làm copywriting
+          đó là xây dựng niềm tin bằng cách xử lý sự từ chối.
+        </p>
+        <p>Có thể nói, đây là một trong những nhiệm vụ quan trọng nhất mà một người làm Copywriting phải làm được.</p>
+        <p>Tại sao lại như vậy?</p>
+        <p class="callout">Vì nếu bạn không xử lý được các lời từ chối, khách hàng sẽ không mua hàng của bạn.</p>
+        <p>Vậy…</p>
+      </section>
+
+      <section>
+        <h2>Làm thế nào để xử lý sự từ chối?</h2>
+        <p>Để xử lý được sự từ chối, bạn cần hiểu khách hàng.</p>
+        <p>Để hiểu khách hàng, bạn cần đặt mình vào vị trí họ.</p>
+        <p>
+          Do đó, khi viết bài bán hàng cho một sản phẩm, bạn cần hóa thân thành khách hàng để nhận diện
+          mọi rào cản, nghi ngờ hoặc lý do có thể khiến họ chần chừ trong các quyết định mua.
+        </p>
+      </section>
+
+      <section>
+        <h2>Ví dụ</h2>
+        <p>
+          Khi bạn viết một bài sale về khóa học đầu tư cho những người không chuyên, muốn tìm thêm
+          thu nhập tay trái.
+        </p>
+        <p>Sẽ có những rào cản khiến họ chùn bước không muốn mua khóa học của bạn như là:</p>
+        <ul class="objections">
+          <li>Không có nhiều kiến thức tài chính, sợ không học được</li>
+          <li>Suy nghĩ chỉ có chuyên gia mới kiếm được tiền, mình dân văn phòng làm 8 tiếng/ngày thì lấy đâu ra thời gian để mà đầu tư</li>
+          <li>Đầu tư toàn lỗ, chứ có thấy ai lãi đâu</li>
+          <li>Người dạy có đủ tầm để mình tin tưởng</li>
+          <li>Sợ học phải khóa có lý thuyết suông, học xong không áp dụng được gì…</li>
+        </ul>
+        <p>Vân vân, mây mây.</p>
+        <p>Nhưng đó sẽ là những lời từ chối mà họ sẽ lấy ra để không mua sản phẩm của bạn nữa.</p>
+        <p>
+          Và sau khi bạn đã xác định được những lời từ chối đó rồi, bạn cần hóa giải nó và chứng minh với họ
+          là sản phẩm của mình có thể giải quyết hết tất cả những lời từ chối đó.
+        </p>
+      </section>
+
+      <section>
+        <h2>Hóa giải từng lời từ chối</h2>
+
+        <div class="card">
+          <span class="label">Lời từ chối số 1</span>
+          <p class="quote">“Không có nhiều kiến thức tài chính, sợ không học được”</p>
+          <p class="solve">Làm những content liên quan để chứng minh các ý sau:</p>
+          <ul>
+            <li>Bạn không cần nhiều kiến thức tài chính, vì khóa này là dành cho người mới</li>
+            <li>Minh chứng là: Rất nhiều bạn học viên của mình đã thành công và chia sẻ là phương pháp trong khóa học là hiệu quả với họ</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="label">Lời từ chối số 2</span>
+          <p class="quote">“Chỉ có chuyên gia mới kiếm được tiền, mình dân văn phòng làm 8 tiếng/ngày thì lấy đâu ra thời gian để mà đầu tư”</p>
+          <p class="solve">Bạn cần:</p>
+          <ul>
+            <li>Chứng minh suy nghĩ này là sai</li>
+            <li>Chuyên gia mà bạn thấy trên mạng chưa chắc đã đầu tư giỏi, những người học tài chính ra chưa chắc đầu tư giỏi.</li>
+            <li>Bạn có thể lấy ví dụ để chứng minh là rất nhiều người thua lỗ vì nghe chuyên gia</li>
+            <li>Tiếp tục nhấn mạnh, phương pháp trong khóa học đủ đơn giản để giúp họ có thể tập trung vào công việc mà vẫn đạt được hiệu quả đầu tư mong muốn</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="label">Lời từ chối số 3</span>
+          <p class="quote">“Đầu tư toàn lỗ, chứ có thấy ai lãi đâu”</p>
+          <ul>
+            <li>Nhấn mạnh trên thị trường có rất nhiều cơ hội, đưa ví dụ cụ thể</li>
+            <li>Nhấn mạnh chỉ là họ chưa biết cách</li>
+            <li>Thêm review + hiệu quả đầu tư của học viên</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="label">Lời từ chối số 4</span>
+          <p class="quote">“Người dạy có đủ tầm để mình tin tưởng?”</p>
+          <ul>
+            <li>Chứng minh mình đã có nhiều năm đầu tư</li>
+            <li>Kết quả đầu tư cụ thể</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="label">Lời từ chối số 5</span>
+          <p class="quote">“Sợ học phải khóa có lý thuyết suông, học xong không áp dụng được gì…”</p>
+          <ul>
+            <li>Nhấn mạnh học đi đôi với hành, áp dụng vào thực tế ngay từ những bài học đầu tiên</li>
+            <li>Thêm feedback từ học viên để họ có thể kiểm chứng</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Tóm lại</h2>
+        <p>
+          Muốn khách hàng tin và mua, bạn phải hiểu họ đang sợ điều gì rồi chứng minh từng nỗi sợ đó
+          là không còn lý do để họ từ chối nữa.
+        </p>
+        <p>Và đây chính là 3 bước để bạn làm được điều này:</p>
+        <ol class="steps">
+          <li><span class="num">1</span>Đóng vai khách hàng</li>
+          <li><span class="num">2</span>Liệt kê lời từ chối</li>
+          <li><span class="num">3</span>Hóa giải bằng niềm tin</li>
+        </ol>
+      </section>
+      <p class="source">
+        Bài gốc trên Substack:
+        <a href="https://vanhda0.substack.com/p/copywriting-101-4-xu-ly-su-tu-choi">Copywriting 101 #4: Xử lý sự từ chối</a>
+      </p>
+    </article>
+
+    <aside class="share reveal">
+      <h2>Chia sẻ bài viết</h2>
+      <div class="socials">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fvananh2002.vercel.app%2Fcopywriting-101-4" target="_blank" rel="noopener" aria-label="Chia sẻ lên Facebook">
+          <svg width="20" height="20"><use href="#i-facebook"/></svg>
+        </a>
+        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvananh2002.vercel.app%2Fcopywriting-101-4&amp;text=X%E1%BB%AD%20l%C3%BD%20s%E1%BB%B1%20t%E1%BB%AB%20ch%E1%BB%91i%20trong%20Copywriting%3A%203%20b%C6%B0%E1%BB%9Bc%20t%E1%BA%A1o%20ni%E1%BB%81m%20tin" target="_blank" rel="noopener" aria-label="Chia sẻ lên X">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.3L5.3 21H2.2l7.2-8.3L2 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.5l11.2 14.5z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fvananh2002.vercel.app%2Fcopywriting-101-4" target="_blank" rel="noopener" aria-label="Chia sẻ lên LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM3.3 9h3.4v11H3.3V9zm5.6 0h3.3v1.5c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.2 2.3 4.2 5.4V20h-3.4v-5.2c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V20H8.9V9z"/></svg>
+        </a>
+      </div>
+    </aside>
+  </main>
+
+  <section class="subscribe">
+      <div class="container wide">
+        <div>
+          <h2>Để không bỏ lỡ thông tin mới nhất từ mình!</h2>
+          <p>Khi nào có bài viết hoặc video mới (siêu hay), mình sẽ gửi đến bạn trước tiên</p>
+        </div>
+        <form>
+          <input type="text" name="name" placeholder="Tên của bạn" aria-label="Tên của bạn" required>
+          <input type="email" name="email" placeholder="Email" aria-label="Email" required>
+          <button type="submit">Đăng ký</button>
+        </form>
+      </div>
   </section>
 
-  <section class="reveal">
-    <h2>Làm thế nào để xử lý sự từ chối?</h2>
-    <p>Để xử lý được sự từ chối, bạn cần hiểu khách hàng.</p>
-    <p>Để hiểu khách hàng, bạn cần đặt mình vào vị trí họ.</p>
-    <p>
-      Do đó, khi viết bài bán hàng cho một sản phẩm, bạn cần hóa thân thành khách hàng để nhận diện
-      mọi rào cản, nghi ngờ hoặc lý do có thể khiến họ chần chừ trong các quyết định mua.
-    </p>
-  </section>
-
-  <section class="reveal">
-    <h2>Ví dụ</h2>
-    <p>
-      Khi bạn viết một bài sale về khóa học đầu tư cho những người không chuyên, muốn tìm thêm
-      thu nhập tay trái.
-    </p>
-    <p>Sẽ có những rào cản khiến họ chùn bước không muốn mua khóa học của bạn như là:</p>
-    <ul class="objections">
-      <li>Không có nhiều kiến thức tài chính, sợ không học được</li>
-      <li>Suy nghĩ chỉ có chuyên gia mới kiếm được tiền, mình dân văn phòng làm 8 tiếng/ngày thì lấy đâu ra thời gian để mà đầu tư</li>
-      <li>Đầu tư toàn lỗ, chứ có thấy ai lãi đâu</li>
-      <li>Người dạy có đủ tầm để mình tin tưởng</li>
-      <li>Sợ học phải khóa có lý thuyết suông, học xong không áp dụng được gì…</li>
-    </ul>
-    <p>Vân vân, mây mây.</p>
-    <p>Nhưng đó sẽ là những lời từ chối mà họ sẽ lấy ra để không mua sản phẩm của bạn nữa.</p>
-    <p>
-      Và sau khi bạn đã xác định được những lời từ chối đó rồi, bạn cần hóa giải nó và chứng minh với họ
-      là sản phẩm của mình có thể giải quyết hết tất cả những lời từ chối đó.
-    </p>
-  </section>
-
-  <section class="reveal">
-    <h2>Hóa giải từng lời từ chối</h2>
-
-    <div class="card">
-      <span class="label">Lời từ chối số 1</span>
-      <p class="quote">“Không có nhiều kiến thức tài chính, sợ không học được”</p>
-      <p class="solve">Làm những content liên quan để chứng minh các ý sau:</p>
-      <ul>
-        <li>Bạn không cần nhiều kiến thức tài chính, vì khóa này là dành cho người mới</li>
-        <li>Minh chứng là: Rất nhiều bạn học viên của mình đã thành công và chia sẻ là phương pháp trong khóa học là hiệu quả với họ</li>
-      </ul>
+  <footer class="site-footer">
+    <a class="logo" href="/">Van Anh Dao</a>
+    <div class="socials">
+      <a href="#" aria-label="Facebook"><svg width="22" height="22"><use href="#i-facebook"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg width="22" height="22"><use href="#i-youtube"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg width="20" height="20"><use href="#i-instagram"/></svg></a>
+      <a href="#" aria-label="TikTok"><svg width="20" height="20"><use href="#i-tiktok"/></svg></a>
     </div>
-
-    <div class="card">
-      <span class="label">Lời từ chối số 2</span>
-      <p class="quote">“Chỉ có chuyên gia mới kiếm được tiền, mình dân văn phòng làm 8 tiếng/ngày thì lấy đâu ra thời gian để mà đầu tư”</p>
-      <p class="solve">Bạn cần:</p>
-      <ul>
-        <li>Chứng minh suy nghĩ này là sai</li>
-        <li>Chuyên gia mà bạn thấy trên mạng chưa chắc đã đầu tư giỏi, những người học tài chính ra chưa chắc đầu tư giỏi.</li>
-        <li>Bạn có thể lấy ví dụ để chứng minh là rất nhiều người thua lỗ vì nghe chuyên gia</li>
-        <li>Tiếp tục nhấn mạnh, phương pháp trong khóa học đủ đơn giản để giúp họ có thể tập trung vào công việc mà vẫn đạt được hiệu quả đầu tư mong muốn</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <span class="label">Lời từ chối số 3</span>
-      <p class="quote">“Đầu tư toàn lỗ, chứ có thấy ai lãi đâu”</p>
-      <ul>
-        <li>Nhấn mạnh trên thị trường có rất nhiều cơ hội, đưa ví dụ cụ thể</li>
-        <li>Nhấn mạnh chỉ là họ chưa biết cách</li>
-        <li>Thêm review + hiệu quả đầu tư của học viên</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <span class="label">Lời từ chối số 4</span>
-      <p class="quote">“Người dạy có đủ tầm để mình tin tưởng?”</p>
-      <ul>
-        <li>Chứng minh mình đã có nhiều năm đầu tư</li>
-        <li>Kết quả đầu tư cụ thể</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <span class="label">Lời từ chối số 5</span>
-      <p class="quote">“Sợ học phải khóa có lý thuyết suông, học xong không áp dụng được gì…”</p>
-      <ul>
-        <li>Nhấn mạnh học đi đôi với hành, áp dụng vào thực tế ngay từ những bài học đầu tiên</li>
-        <li>Thêm feedback từ học viên để họ có thể kiểm chứng</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="reveal">
-    <h2>Tóm lại</h2>
-    <p>
-      Muốn khách hàng tin và mua, bạn phải hiểu họ đang sợ điều gì rồi chứng minh từng nỗi sợ đó
-      là không còn lý do để họ từ chối nữa.
-    </p>
-    <p>Và đây chính là 3 bước để bạn làm được điều này:</p>
-    <ol class="steps">
-      <li><span class="num">1</span>Đóng vai khách hàng</li>
-      <li><span class="num">2</span>Liệt kê lời từ chối</li>
-      <li><span class="num">3</span>Hóa giải bằng niềm tin</li>
-    </ol>
-  </section>
-
-  <footer class="reveal">
-    <p>
-      Bài gốc trên Substack:
-      <a href="https://vanhda0.substack.com/p/copywriting-101-4-xu-ly-su-tu-choi">Copywriting 101 #4: Xử lý sự từ chối</a>
-    </p>
-    <p><a href="/">← Về trang chủ</a></p>
+    <small>Copyright © 2025 Van Anh Dao</small>
   </footer>
 
+  <script src="/site.js"></script>
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    document.querySelectorAll('time[data-ago]').forEach((t) => { t.textContent = timeAgo(t.getAttribute('datetime')); });
   </script>
 </body>
 </html>
