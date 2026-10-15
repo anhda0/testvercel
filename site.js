@@ -86,3 +86,17 @@ async function loadPosts() {
 function latestPosts(posts) {
   return [...posts].sort((a, b) => b.date.localeCompare(a.date));
 }
+
+// ---------- Khóa học ----------
+// Bài học của một khóa: các bài có tiêu đề "[<series> #<số>] - <tên bài>", xếp theo số
+function courseLessons(course, posts) {
+  const prefix = `[${course.series} #`;
+  return posts
+    .filter((p) => p.title.startsWith(prefix))
+    .map((p) => {
+      const m = p.title.slice(prefix.length).match(/^(\d+)\]\s*-?\s*(.*)$/);
+      return m ? { ...p, number: +m[1], lessonTitle: m[2] || p.title } : null;
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.number - b.number);
+}

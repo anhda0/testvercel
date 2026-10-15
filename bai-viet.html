@@ -41,6 +41,28 @@
     .paper iframe { max-width: 100%; margin-bottom: 32px; }
     .source { font-size: 16px; color: var(--muted); border-top: 1px solid #e6eaef; padding-top: 24px; }
 
+    /* Điều hướng trong khóa học */
+    .course-nav {
+      max-width: 816px;
+      margin: 46px auto 0;
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      padding: 24px 28px;
+    }
+    .course-nav .head { text-align: center; color: var(--muted); font-size: 15px; margin: 0 0 16px; }
+    .course-nav .head a { color: var(--link); font-weight: 600; }
+    .course-nav .links { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .course-nav .links a {
+      border: 1px solid #dfe5ec;
+      border-radius: 6px;
+      padding: 12px 16px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .course-nav .links a:hover { border-color: var(--link); color: var(--link); }
+    .course-nav .links small { display: block; color: var(--muted); font-size: 13px; margin-bottom: 2px; }
+    .course-nav .links .next { grid-column: 2; text-align: right; }
+
     /* Chia sẻ */
     .share {
       max-width: 816px;
@@ -61,7 +83,9 @@
       .article-head time { font-size: 16px; }
       .paper h2 { font-size: 21px; }
       .paper h3 { font-size: 19px; }
-      .share { margin-top: 28px; }
+      .share, .course-nav { margin-top: 28px; }
+      .course-nav .links { grid-template-columns: 1fr; }
+      .course-nav .links .next { grid-column: auto; }
     }
   </style>
 </head>
@@ -109,6 +133,8 @@
         </p>
       </article>
 
+      <nav class="course-nav reveal" id="course-nav" hidden></nav>
+
       <aside class="share reveal">
         <h2>Chia sẻ bài viết</h2>
         <div class="socials">
@@ -151,6 +177,8 @@
     <small>Copyright © 2025 Van Anh Dao</small>
   </footer>
 
+  <script src="/posts.js"></script>
+  <script src="/courses.js"></script>
   <script src="/site.js"></script>
   <script>
     // Bỏ những phần chỉ dùng được trên Substack (form đăng ký, bình chọn, nút phóng ảnh) và mã lạ
@@ -208,10 +236,34 @@
         status.remove();
         document.getElementById('post').hidden = false;
         observeReveal();
+        showCourseNav(post);
       } catch {
         status.innerHTML = 'Không tìm thấy bài viết này. <a class="more" href="/hoc-cung-minh">Xem các bài khác</a>';
       }
     }
+    // Bài thuộc một khóa học: hiện bài trước / bài tiếp theo
+    async function showCourseNav(post) {
+      const posts = await loadPosts();
+      for (const course of window.COURSES) {
+        const lessons = courseLessons(course, posts);
+        const i = lessons.findIndex((l) => l.slug === post.slug);
+        if (i === -1) continue;
+        const link = (l, cls, label) => l
+          ? `<a class="${cls}" href="${escapeHtml(l.url)}"><small>${label}</small>Bài ${l.number}: ${escapeHtml(l.lessonTitle)}</a>`
+          : '';
+        const nav = document.getElementById('course-nav');
+        nav.innerHTML = `
+          <p class="head">Bài ${lessons[i].number} trong khóa <a href="/mini-course/${escapeHtml(course.slug)}">${escapeHtml(course.title)}</a></p>
+          <div class="links">
+            ${link(lessons[i - 1], 'prev', '← Bài trước')}
+            ${link(lessons[i + 1], 'next', 'Bài tiếp theo →')}
+          </div>`;
+        nav.hidden = false;
+        observeReveal(nav.parentElement);
+        return;
+      }
+    }
+
     showPost();
   </script>
 </body>

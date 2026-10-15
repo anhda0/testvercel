@@ -1,9 +1,20 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/bai-viet/:slug", "destination": "/bai-viet" }
+    {
+      "source": "/bai-viet/:slug",
+      "destination": "/bai-viet"
+    },
+    {
+      "source": "/mini-course/:slug",
+      "destination": "/khoa-hoc"
+    }
   ],
   "redirects": [
-    { "source": "/copywriting-101-4", "destination": "/bai-viet/copywriting-101-4-xu-ly-su-tu-choi", "permanent": true }
+    {
+      "source": "/copywriting-101-4",
+      "destination": "/bai-viet/copywriting-101-4-xu-ly-su-tu-choi",
+      "permanent": true
+    }
   ]
 }

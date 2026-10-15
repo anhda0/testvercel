@@ -6,7 +6,6 @@
   <title>Mini-course | Van Anh Dao</title>
   <meta name="description" content="Các khóa học nhỏ do Vân Anh thiết kế: marketing, product, kỹ năng đi làm.">
   <meta name="author" content="Van Anh Dao">
-  <meta name="robots" content="noindex">
   <link rel="canonical" href="https://vananh2002.vercel.app/mini-course">
 
   <meta property="og:type" content="website">
@@ -21,7 +20,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .blank { min-height: 60vh; }
+    .courses { max-width: 1097px; padding-top: 60px; padding-bottom: 120px; }
+    .courses h1 { font-size: 36px; font-weight: 600; margin: 0 0 50px; }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 80px 45px;
+    }
+    .course .thumb { aspect-ratio: 313 / 204; }
+    .course .thumb img { transition: transform 0.4s; }
+    a.course:hover .thumb img { transform: scale(1.04); }
+    .course h2 { font-size: 26px; font-weight: 500; line-height: 1.15; margin: 26px 0 22px; transition: color 0.2s; }
+    a.course:hover h2 { color: var(--link); }
+    .course p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0 0 8px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+    }
+    .course .meta { color: var(--link); font-size: 14px; font-weight: 600; }
+
+    @media (max-width: 860px) {
+      .courses { padding-top: 36px; padding-bottom: 100px; }
+      .courses h1 { font-size: 30px; margin-bottom: 32px; }
+      .course-grid { grid-template-columns: repeat(2, 1fr); gap: 48px 24px; }
+      .course h2 { font-size: 22px; margin: 18px 0 12px; }
+    }
+    @media (max-width: 560px) {
+      .course-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -52,7 +84,24 @@
     </div>
   </header>
 
-  <main class="blank narrow"></main>
+  <main class="courses narrow">
+    <h1>Mini-courses</h1>
+    <div class="course-grid" id="courses"></div>
+  </main>
+
+  <section class="subscribe">
+      <div class="container wide">
+        <div>
+          <h2>Để không bỏ lỡ thông tin mới nhất từ mình!</h2>
+          <p>Khi nào có bài viết hoặc video mới (siêu hay), mình sẽ gửi đến bạn trước tiên</p>
+        </div>
+        <form>
+          <input type="text" name="name" placeholder="Tên của bạn" aria-label="Tên của bạn" required>
+          <input type="email" name="email" placeholder="Email" aria-label="Email" required>
+          <button type="submit">Đăng ký</button>
+        </form>
+      </div>
+  </section>
 
   <footer class="site-footer">
     <a class="logo" href="/">Van Anh Dao</a>
@@ -65,6 +114,25 @@
     <small>Copyright © 2025 Van Anh Dao</small>
   </footer>
 
+  <script src="posts.js"></script>
+  <script src="courses.js"></script>
   <script src="site.js"></script>
+  <script>
+    loadPosts().then((posts) => {
+      const el = document.getElementById('courses');
+      el.innerHTML = window.COURSES.map((c) => {
+        const lessons = courseLessons(c, posts);
+        const cover = lessons[0] || {};
+        return `
+          <a class="course reveal" href="/mini-course/${escapeHtml(c.slug)}">
+            ${thumbHtml(cover, 'thumb')}
+            <h2>${escapeHtml(c.title)}</h2>
+            <p>${escapeHtml(c.description)}</p>
+            <span class="meta">${lessons.length} bài học</span>
+          </a>`;
+      }).join('');
+      observeReveal(el);
+    });
+  </script>
 </body>
 </html>

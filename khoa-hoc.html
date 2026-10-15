@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khóa học | Van Anh Dao</title>
+  <meta name="description" content="Các khóa học nhỏ do Vân Anh thiết kế: marketing, product, kỹ năng đi làm.">
+  <meta name="author" content="Van Anh Dao">
+  <link rel="canonical" href="https://vananh2002.vercel.app/mini-course">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:site_name" content="Vân Anh">
+  <meta property="og:title" content="Mini-course | Van Anh Dao">
+  <meta property="og:description" content="Các khóa học nhỏ do Vân Anh thiết kế: marketing, product, kỹ năng đi làm.">
+  <meta property="og:url" content="https://vananh2002.vercel.app/mini-course">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .course-page { padding-top: 56px; padding-bottom: 100px; }
+    .course-head {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+    .course-head .cover { flex: 0 0 340px; aspect-ratio: 313 / 204; border-radius: 8px; }
+    .course-head .label { color: var(--link); font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+    .course-head h1 { font-size: 40px; font-weight: 600; line-height: 1.2; margin: 6px 0 14px; }
+    .course-head p { font-size: 18px; line-height: 1.7; margin: 0 0 22px; }
+    .start {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 12px 28px;
+      border-radius: 4px;
+      transition: filter 0.2s;
+    }
+    .start:hover { filter: brightness(1.08); }
+
+    .lessons h2 { font-size: 28px; font-weight: 600; margin: 0 0 30px; }
+    .lesson-no { display: block; color: var(--link); font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .lessons .post h3 { margin-top: 0; }
+    .lessons .post p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+
+    @media (max-width: 860px) {
+      .course-page { padding-top: 36px; padding-bottom: 64px; }
+      .course-head { flex-direction: column; align-items: stretch; gap: 24px; margin-bottom: 40px; }
+      .course-head .cover { flex: none; width: 100%; }
+      .course-head h1 { font-size: 30px; }
+      .course-head p { font-size: 16px; }
+      .lessons h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Icon dùng chung -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3L10 15z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 3h-3.3v12.2a2.8 2.8 0 1 1-2-2.7V9.1a6.2 6.2 0 1 0 5.3 6.1V9a7.8 7.8 0 0 0 4.4 1.4V7.1A4.4 4.4 0 0 1 16.6 3z"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="container wide">
+      <a class="logo" href="/">Van Anh Dao</a>
+      <button class="icon-btn menu-btn" aria-label="Mở menu" aria-expanded="false" aria-controls="nav">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="/">Trang chủ</a>
+        <a href="/mini-course">Mini-course</a>
+        <a href="/hoc-cung-minh">Học cùng mình</a>
+        <a href="/minh-lam">Mình làm</a>
+        <a href="/gioi-thieu">Mình là ai?</a>
+        <button class="icon-btn" aria-label="Tìm kiếm">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.5-4.5"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="course-page narrow">
+    <p class="status empty" id="status">Đang tải khóa học...</p>
+    <div id="course" hidden>
+      <section class="course-head reveal">
+        <div class="cover ph" id="cover"></div>
+        <div>
+          <span class="label">Mini-course</span>
+          <h1 id="title"></h1>
+          <p id="description"></p>
+          <a class="start" id="start" href="#">Bắt đầu học</a>
+        </div>
+      </section>
+
+      <section class="lessons">
+        <h2 id="count"></h2>
+        <div id="lessons"></div>
+      </section>
+    </div>
+  </main>
+
+  <section class="subscribe">
+      <div class="container wide">
+        <div>
+          <h2>Để không bỏ lỡ thông tin mới nhất từ mình!</h2>
+          <p>Khi nào có bài viết hoặc video mới (siêu hay), mình sẽ gửi đến bạn trước tiên</p>
+        </div>
+        <form>
+          <input type="text" name="name" placeholder="Tên của bạn" aria-label="Tên của bạn" required>
+          <input type="email" name="email" placeholder="Email" aria-label="Email" required>
+          <button type="submit">Đăng ký</button>
+        </form>
+      </div>
+  </section>
+
+  <footer class="site-footer">
+    <a class="logo" href="/">Van Anh Dao</a>
+    <div class="socials">
+      <a href="#" aria-label="Facebook"><svg width="22" height="22"><use href="#i-facebook"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg width="22" height="22"><use href="#i-youtube"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg width="20" height="20"><use href="#i-instagram"/></svg></a>
+      <a href="#" aria-label="TikTok"><svg width="20" height="20"><use href="#i-tiktok"/></svg></a>
+    </div>
+    <small>Copyright © 2025 Van Anh Dao</small>
+  </footer>
+
+  <script src="/posts.js"></script>
+  <script src="/courses.js"></script>
+  <script src="/site.js"></script>
+  <script>
+    const slug = location.pathname.split('/').filter(Boolean).pop();
+    const course = window.COURSES.find((c) => c.slug === slug);
+    const status = document.getElementById('status');
+
+    if (!course) {
+      status.innerHTML = 'Không tìm thấy khóa học này. <a class="more" href="/mini-course">Xem các khóa học</a>';
+    } else {
+      document.title = `${course.title} | Van Anh Dao`;
+      document.querySelector('meta[name="description"]').setAttribute('content', course.description);
+      document.querySelector('link[rel="canonical"]').setAttribute('href', `https://vananh2002.vercel.app/mini-course/${course.slug}`);
+
+      loadPosts().then((posts) => {
+        const lessons = courseLessons(course, posts);
+        document.getElementById('title').textContent = course.title;
+        document.getElementById('description').textContent = course.description;
+        document.getElementById('count').textContent = `${lessons.length} bài học`;
+        if (lessons[0]) {
+          document.getElementById('start').href = lessons[0].url;
+          if (lessons[0].image) document.getElementById('cover').innerHTML = `<img src="${escapeHtml(imageUrl(lessons[0].image, 800))}" alt="">`;
+        } else {
+          document.getElementById('start').hidden = true;
+        }
+        document.getElementById('lessons').innerHTML = lessons.map((p) => `
+          <a class="post reveal" href="${escapeHtml(p.url)}">
+            ${thumbHtml(p, 'thumb')}
+            <div>
+              <span class="lesson-no">Bài ${p.number}</span>
+              <h3>${escapeHtml(p.lessonTitle)}</h3>
+              <p>${escapeHtml(p.excerpt)}</p>
+            </div>
+          </a>`).join('') || '<p class="empty">Khóa học đang được chuẩn bị, bạn quay lại sau nha!</p>';
+        status.remove();
+        document.getElementById('course').hidden = false;
+        observeReveal();
+      });
+    }
+  </script>
+</body>
+</html>
