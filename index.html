@@ -177,8 +177,10 @@
   <script src="posts.js"></script>
   <script src="site.js"></script>
   <script>
-    document.getElementById('latest').innerHTML = latestPosts().slice(0, 4).map(postItemHtml).join('');
-    observeReveal();
+    loadPosts().then((posts) => {
+      document.getElementById('latest').innerHTML = latestPosts(posts).slice(0, 4).map(postItemHtml).join('');
+      observeReveal();
+    });
   </script>
 </body>
 </html>

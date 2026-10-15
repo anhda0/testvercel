@@ -12,11 +12,13 @@ nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
   menuBtn.setAttribute('aria-expanded', false);
 }));
 
-// Chưa nối với dịch vụ gửi mail nên chưa lưu thông tin đăng ký
+// Đăng ký nhận tin qua Substack: mở trang đăng ký đã điền sẵn email
+const SUBSTACK = 'https://vanhda0.substack.com';
 document.querySelectorAll('.subscribe form').forEach((form) => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    form.querySelector('button').textContent = 'Sắp ra mắt!';
+    const email = form.querySelector('input[type="email"]').value.trim();
+    window.open(`${SUBSTACK}/subscribe?email=${encodeURIComponent(email)}`, '_blank', 'noopener');
   });
 });
 
@@ -40,15 +42,21 @@ function escapeHtml(s) {
 
 // "2 ngày trước" nếu trong vòng 30 ngày, còn lại hiện ngày dd/mm/yyyy
 function timeAgo(iso) {
-  const date = new Date(iso + 'T00:00:00');
+  const date = new Date(iso.length === 10 ? iso + 'T00:00:00' : iso);
   const days = Math.floor((Date.now() - date) / 86400000);
   if (days < 1) return 'Hôm nay';
   if (days < 30) return `${days} ngày trước`;
   return date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
-function thumbHtml(post, className) {
-  const img = post.image ? `<img src="${escapeHtml(post.image)}" alt="" loading="lazy">` : '';
+// Ảnh từ Substack: lấy bản thu nhỏ qua CDN của Substack cho nhẹ
+function imageUrl(src, width) {
+  if (!src.startsWith('https://substack-post-media.s3.amazonaws.com/')) return src;
+  return `https://substackcdn.com/image/fetch/w_${width},c_limit,f_auto,q_auto:good/${encodeURIComponent(src)}`;
+}
+
+function thumbHtml(post, className, width = 600) {
+  const img = post.image ? `<img src="${escapeHtml(imageUrl(post.image, width))}" alt="" loading="lazy">` : '';
   return `<div class="${className} ph">${img}</div>`;
 }
 
@@ -64,6 +72,17 @@ function postItemHtml(post) {
     </a>`;
 }
 
-function latestPosts() {
-  return [...window.POSTS].sort((a, b) => b.date.localeCompare(a.date));
+// Bài mới nhất từ Substack qua /api/posts; không gọi được thì dùng bản sao trong posts.js
+async function loadPosts() {
+  try {
+    const res = await fetch('/api/posts');
+    if (!res.ok) throw new Error(res.status);
+    return await res.json();
+  } catch {
+    return window.POSTS || [];
+  }
+}
+
+function latestPosts(posts) {
+  return [...posts].sort((a, b) => b.date.localeCompare(a.date));
 }

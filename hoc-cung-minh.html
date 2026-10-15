@@ -165,6 +165,7 @@
       ? location.hash.slice(1) : 'marketing';
     let sort = 'latest';
     let shown = PAGE_SIZE;
+    let allPosts = [];
 
     function selectTab(group, attr, value) {
       group.querySelectorAll('.tab').forEach((t) => t.setAttribute('aria-selected', t.dataset[attr] === value));
@@ -172,7 +173,7 @@
 
     // 1 bài lớn + tối đa 4 bài nhỏ mới nhất của chủ đề đang chọn
     function renderFeatured() {
-      const posts = latestPosts().filter((p) => p.category === category).slice(0, 5);
+      const posts = latestPosts(allPosts).filter((p) => p.category === category).slice(0, 5);
       const el = document.getElementById('featured');
       if (!posts.length) {
         el.innerHTML = '<p class="empty">Chưa có bài viết nào trong mục này, bạn quay lại sau nha!</p>';
@@ -181,7 +182,7 @@
       const [main, ...rest] = posts;
       el.innerHTML = `
         <a class="feat-main reveal${rest.length ? '' : ' solo'}" href="${escapeHtml(main.url)}">
-          ${main.image ? `<img src="${escapeHtml(main.image)}" alt="">` : ''}
+          ${main.image ? `<img src="${escapeHtml(imageUrl(main.image, 1200))}" alt="">` : ''}
           <div class="body">
             <h3>${escapeHtml(main.title)}</h3>
             <p class="clamp">${escapeHtml(main.excerpt)}</p>
@@ -196,11 +197,11 @@
       observeReveal(el);
     }
 
-    // Tất cả bài viết, sắp theo ngày (Latest) hoặc theo thứ hạng tự đặt (Top)
+    // Tất cả bài viết, sắp theo ngày (Latest) hoặc theo lượt thích + bình luận trên Substack (Top)
     function renderList() {
       const posts = sort === 'latest'
-        ? latestPosts()
-        : window.POSTS.filter((p) => p.top).sort((a, b) => a.top - b.top);
+        ? latestPosts(allPosts)
+        : latestPosts(allPosts).sort((a, b) => b.score - a.score);
       const el = document.getElementById('list');
       el.innerHTML = posts.length
         ? posts.slice(0, shown).map(postItemHtml).join('')
@@ -232,8 +233,11 @@
 
     selectTab(document.getElementById('cat-tabs'), 'cat', category);
     selectTab(document.getElementById('sort-tabs'), 'sort', sort);
-    renderFeatured();
-    renderList();
+    loadPosts().then((posts) => {
+      allPosts = posts;
+      renderFeatured();
+      renderList();
+    });
   </script>
 </body>
 </html>
