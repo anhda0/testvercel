@@ -89,8 +89,15 @@ function latestPosts(posts) {
 }
 
 // ---------- Khóa học ----------
-// Bài học của một khóa: các bài có tiêu đề "[<series> #<số>] - <tên bài>", xếp theo số
+// Bài học của một khóa: theo danh sách slug `lessons`, hoặc các bài có tiêu đề
+// "[<series> #<số>] - <tên bài>", xếp theo số
 function courseLessons(course, posts) {
+  if (course.lessons) {
+    return course.lessons
+      .map((slug) => posts.find((p) => p.slug === slug))
+      .filter(Boolean)
+      .map((p, i) => ({ ...p, number: i + 1, lessonTitle: p.title }));
+  }
   const prefix = `[${course.series} #`;
   return posts
     .filter((p) => p.title.startsWith(prefix))
