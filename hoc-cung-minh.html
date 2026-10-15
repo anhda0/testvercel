@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
   <style>
     .learn { padding-top: 36px; padding-bottom: 80px; }
 
@@ -49,12 +49,13 @@
       background: linear-gradient(100deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1));
     }
     .feat-main .body { position: relative; z-index: 1; padding: 30px 34px; max-width: 420px; }
-    .feat-main h3 { font-size: 26px; font-weight: 600; line-height: 1.2; margin: 0 0 14px; }
+    .feat-main.solo { grid-column: 1 / -1; }
+    .feat-main h3 { font-size: 26px; font-weight: 500; line-height: 1.2; margin: 0 0 14px; }
     .feat-main p { font-size: 15px; line-height: 1.75; margin: 0 0 10px; }
     .feat-main time { font-size: 12px; }
 
     .feat-item .thumb { aspect-ratio: 248 / 162; }
-    .feat-item h3 { font-size: 20px; font-weight: 600; line-height: 1.2; margin: 14px 0 8px; transition: color 0.2s; }
+    .feat-item h3 { font-size: 20px; font-weight: 500; line-height: 1.2; margin: 14px 0 8px; transition: color 0.2s; }
     .feat-item:hover h3 { color: var(--link); }
     .feat-item time { color: var(--muted); font-size: 12px; }
 
@@ -101,7 +102,7 @@
       </button>
       <nav class="nav" id="nav">
         <a href="/">Trang chủ</a>
-        <a href="/#bat-dau">Bắt đầu ở đây</a>
+        <a href="/mini-course">Mini-course</a>
         <a href="/hoc-cung-minh">Học cùng mình</a>
         <a href="/minh-lam">Mình làm</a>
         <a href="/gioi-thieu">Mình là ai?</a>
@@ -156,8 +157,8 @@
     <small>Copyright © 2025 Van Anh Dao</small>
   </footer>
 
-  <script src="/posts.js"></script>
-  <script src="/site.js"></script>
+  <script src="posts.js"></script>
+  <script src="site.js"></script>
   <script>
     const PAGE_SIZE = 6;
     let category = ['marketing', 'product', 'self-development'].includes(location.hash.slice(1))
@@ -179,7 +180,7 @@
       }
       const [main, ...rest] = posts;
       el.innerHTML = `
-        <a class="feat-main reveal" href="${escapeHtml(main.url)}">
+        <a class="feat-main reveal${rest.length ? '' : ' solo'}" href="${escapeHtml(main.url)}">
           ${main.image ? `<img src="${escapeHtml(main.image)}" alt="">` : ''}
           <div class="body">
             <h3>${escapeHtml(main.title)}</h3>

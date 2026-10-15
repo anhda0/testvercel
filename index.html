@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
   <style>
     /* ---------- Hero ---------- */
     .hero {
@@ -86,7 +86,7 @@
       </button>
       <nav class="nav" id="nav">
         <a href="/">Trang chủ</a>
-        <a href="#bat-dau">Bắt đầu ở đây</a>
+        <a href="/mini-course">Mini-course</a>
         <a href="/hoc-cung-minh">Học cùng mình</a>
         <a href="/minh-lam">Mình làm</a>
         <a href="/gioi-thieu">Mình là ai?</a>
@@ -118,7 +118,7 @@
       <div class="container">
         <h2>Bạn đang tìm kiếm điều gì?</h2>
         <div class="cards">
-          <a class="card reveal" href="/hoc-cung-minh">
+          <a class="card reveal" href="/mini-course">
             <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
             <h3>Mini-courses</h3>
             <p>Các khóa học nhỏ do mình thiết kế: cách làm marketing, product, kỹ năng đi làm,...</p>
@@ -174,8 +174,8 @@
     <small>Copyright © 2025 Van Anh Dao</small>
   </footer>
 
-  <script src="/posts.js"></script>
-  <script src="/site.js"></script>
+  <script src="posts.js"></script>
+  <script src="site.js"></script>
   <script>
     document.getElementById('latest').innerHTML = latestPosts().slice(0, 4).map(postItemHtml).join('');
     observeReveal();
