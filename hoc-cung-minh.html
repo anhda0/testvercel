@@ -106,6 +106,7 @@
         <a href="/">Trang chủ</a>
         <a href="/mini-course">Mini-course</a>
         <a href="/hoc-cung-minh">Học cùng mình</a>
+        <a href="/minh-lam">Mình làm</a>
         <a href="/gioi-thieu">Mình là ai?</a>
         <button class="icon-btn" aria-label="Tìm kiếm">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.5-4.5"/></svg>
@@ -172,9 +173,14 @@
       group.querySelectorAll('.tab').forEach((t) => t.setAttribute('aria-selected', t.dataset[attr] === value));
     }
 
+    const FEATURED_COUNT = 5;
+    function categoryPosts() {
+      return latestPosts(allPosts).filter((p) => p.category === category);
+    }
+
     // 1 bài lớn + tối đa 4 bài nhỏ mới nhất của chủ đề đang chọn
     function renderFeatured() {
-      const posts = latestPosts(allPosts).filter((p) => p.category === category).slice(0, 5);
+      const posts = categoryPosts().slice(0, FEATURED_COUNT);
       const el = document.getElementById('featured');
       if (!posts.length) {
         el.innerHTML = '<p class="empty">Chưa có bài viết nào trong mục này, bạn quay lại sau nha!</p>';
@@ -198,15 +204,15 @@
       observeReveal(el);
     }
 
-    // Tất cả bài viết, sắp theo ngày (Latest) hoặc theo lượt thích + bình luận trên Substack (Top)
+    // Các bài còn lại của chủ đề đang chọn (không lặp lại bài ở phần nổi bật),
+    // sắp theo ngày (Latest) hoặc theo lượt thích + bình luận trên Substack (Top)
     function renderList() {
-      const posts = sort === 'latest'
-        ? latestPosts(allPosts)
-        : latestPosts(allPosts).sort((a, b) => b.score - a.score);
+      const rest = categoryPosts().slice(FEATURED_COUNT);
+      const posts = sort === 'latest' ? rest : rest.sort((a, b) => b.score - a.score);
       const el = document.getElementById('list');
       el.innerHTML = posts.length
         ? posts.slice(0, shown).map(postItemHtml).join('')
-        : '<p class="empty">Chưa có bài viết nào.</p>';
+        : '<p class="empty">Chưa có thêm bài nào trong mục này.</p>';
       document.getElementById('more').hidden = shown >= posts.length;
       observeReveal(el);
     }
@@ -217,7 +223,9 @@
       category = tab.dataset.cat;
       history.replaceState(null, '', '#' + category);
       selectTab(e.currentTarget, 'cat', category);
+      shown = PAGE_SIZE;
       renderFeatured();
+      renderList();
     });
     document.getElementById('sort-tabs').addEventListener('click', (e) => {
       const tab = e.target.closest('.tab');
