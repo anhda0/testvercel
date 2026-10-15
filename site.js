@@ -1,26 +1,4 @@
-// Phần dùng chung cho các trang theo thiết kế mới
-
-// Menu trên điện thoại
-const menuBtn = document.querySelector('.menu-btn');
-const nav = document.getElementById('nav');
-menuBtn.addEventListener('click', () => {
-  const open = nav.classList.toggle('open');
-  menuBtn.setAttribute('aria-expanded', open);
-});
-nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
-  nav.classList.remove('open');
-  menuBtn.setAttribute('aria-expanded', false);
-}));
-
-// Đăng ký nhận tin qua Substack: mở trang đăng ký đã điền sẵn email
-const SUBSTACK = 'https://vanhda0.substack.com';
-document.querySelectorAll('.subscribe form').forEach((form) => {
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = form.querySelector('input[type="email"]').value.trim();
-    window.open(`${SUBSTACK}/subscribe?email=${encodeURIComponent(email)}`, '_blank', 'noopener');
-  });
-});
+// Dữ liệu và hiệu ứng dùng chung (phần giao diện nằm ở components.js)
 
 // Hiện dần khi cuộn tới: khi mép trên của khối vào tới 90% chiều cao màn hình.
 // Không dùng tỉ lệ diện tích, vì khối dài (như nội dung bài viết) sẽ không bao giờ đủ tỉ lệ trên điện thoại.
@@ -37,42 +15,6 @@ function observeReveal(root = document) {
 observeReveal();
 
 // ---------- Bài viết ----------
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-
-// "2 ngày trước" nếu trong vòng 30 ngày, còn lại hiện ngày dd/mm/yyyy
-function timeAgo(iso) {
-  const date = new Date(iso.length === 10 ? iso + 'T00:00:00' : iso);
-  const days = Math.floor((Date.now() - date) / 86400000);
-  if (days < 1) return 'Hôm nay';
-  if (days < 30) return `${days} ngày trước`;
-  return date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
-}
-
-// Ảnh từ Substack: lấy bản thu nhỏ qua CDN của Substack cho nhẹ
-function imageUrl(src, width) {
-  if (!src.startsWith('https://substack-post-media.s3.amazonaws.com/')) return src;
-  return `https://substackcdn.com/image/fetch/w_${width},c_limit,f_auto,q_auto:good/${encodeURIComponent(src)}`;
-}
-
-function thumbHtml(post, className, width = 600) {
-  const img = post.image ? `<img src="${escapeHtml(imageUrl(post.image, width))}" alt="" loading="lazy">` : '';
-  return `<div class="${className} ph">${img}</div>`;
-}
-
-function postItemHtml(post) {
-  return `
-    <a class="post reveal" href="${escapeHtml(post.url)}">
-      ${thumbHtml(post, 'thumb')}
-      <div>
-        <h3>${escapeHtml(post.title)}</h3>
-        <p>${escapeHtml(post.excerpt)}</p>
-        <time datetime="${post.date}">${timeAgo(post.date)}</time>
-      </div>
-    </a>`;
-}
-
 // Bài mới nhất từ Substack qua /api/posts; không gọi được thì dùng bản sao trong posts.js
 async function loadPosts() {
   try {

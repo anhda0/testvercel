@@ -12,6 +12,8 @@
 }
 
 * { box-sizing: border-box; }
+/* Thành phần trong components.js: không tạo khung riêng để bố cục (và menu dính trên cùng) giữ nguyên */
+site-header, site-subscribe, site-footer, social-links, share-buttons { display: contents; }
 body {
   margin: 0;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
@@ -101,6 +103,50 @@ img { display: block; max-width: 100%; }
 .more[hidden] { display: none; }
 .more svg { transition: transform 0.2s; }
 .more:hover svg { transform: translateX(4px); }
+
+.post-label { display: block; color: var(--link); font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+
+/* ---------- Trang dạng lưới thẻ (Mình làm, Mini-course) ---------- */
+.grid-page { max-width: 1097px; padding-top: 60px; padding-bottom: 120px; }
+.grid-page h1 { font-size: 36px; font-weight: 600; margin: 0 0 50px; }
+.grid-section + .grid-section { margin-top: 80px; }
+.grid-section > h2 { font-size: 28px; font-weight: 600; margin: 0 0 30px; }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 80px 45px;
+}
+.grid-card .thumb { aspect-ratio: 313 / 204; }
+.grid-card .thumb img { transition: transform 0.4s; }
+.grid-card:hover .thumb img { transform: scale(1.04); }
+.grid-card h3 { font-size: 26px; font-weight: 500; line-height: 1.15; margin: 26px 0 22px; transition: color 0.2s; }
+.grid-card:hover h3 { color: var(--link); }
+.grid-card p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 0 8px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.grid-card time { color: var(--muted); font-size: 12px; }
+.grid-card .meta { color: var(--link); font-size: 14px; font-weight: 600; }
+
+/* ---------- Chia sẻ bài viết ---------- */
+.share {
+  max-width: 816px;
+  margin: 46px auto 0;
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding: 28px 24px 30px;
+  text-align: center;
+}
+.share h2 { font-size: 22px; font-weight: 600; margin: 0 0 14px; }
+.share .socials { justify-content: center; gap: 14px; }
+.share .socials a { width: 38px; height: 38px; background: #333; }
 
 /* ---------- Tab ---------- */
 .tabs { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -227,8 +273,18 @@ img { display: block; max-width: 100%; }
   .subscribe form { grid-template-columns: 1fr; }
   .subscribe button { grid-column: 1; grid-row: auto; }
 
+  .grid-page { padding-top: 36px; padding-bottom: 100px; }
+  .grid-page h1 { font-size: 30px; margin-bottom: 32px; }
+  .grid-section > h2 { font-size: 24px; }
+  .card-grid { grid-template-columns: repeat(2, 1fr); gap: 48px 24px; }
+  .grid-card h3 { font-size: 22px; margin: 18px 0 12px; }
+  .share { margin-top: 28px; }
+
   .paper { padding: 32px 24px; font-size: 16px; }
   .paper p, .paper ul, .paper ol { margin-bottom: 24px; }
+}
+@media (max-width: 560px) {
+  .card-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
   .container, .narrow, .wide { padding-left: 16px; padding-right: 16px; }

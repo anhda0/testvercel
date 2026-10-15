@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+  <script src="/components.js"></script>
   <style>
     .article { padding-top: 56px; padding-bottom: 120px; }
     .article-head { text-align: center; max-width: 640px; margin: 0 auto 40px; }
@@ -65,58 +66,20 @@
     .course-nav .links small { display: block; color: var(--muted); font-size: 13px; margin-bottom: 2px; }
     .course-nav .links .next { grid-column: 2; text-align: right; }
 
-    /* Chia sẻ */
-    .share {
-      max-width: 816px;
-      margin: 46px auto 0;
-      background: var(--white);
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-      padding: 28px 24px 30px;
-      text-align: center;
-    }
-    .share h2 { font-size: 22px; font-weight: 600; margin: 0 0 14px; }
-    .share .socials { justify-content: center; gap: 14px; }
-    .share .socials a { width: 38px; height: 38px; background: #333; }
-
     @media (max-width: 860px) {
       .article { padding-top: 36px; padding-bottom: 72px; }
       .article-head h1 { font-size: 28px; }
       .article-head time { font-size: 16px; }
       .paper h2 { font-size: 21px; }
       .paper h3 { font-size: 19px; }
-      .share, .course-nav { margin-top: 28px; }
+      .course-nav { margin-top: 28px; }
       .course-nav .links { grid-template-columns: 1fr; }
       .course-nav .links .next { grid-column: auto; }
     }
   </style>
 </head>
 <body>
-  <!-- Icon dùng chung -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></symbol>
-    <symbol id="i-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3L10 15z"/></symbol>
-    <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 3h-3.3v12.2a2.8 2.8 0 1 1-2-2.7V9.1a6.2 6.2 0 1 0 5.3 6.1V9a7.8 7.8 0 0 0 4.4 1.4V7.1A4.4 4.4 0 0 1 16.6 3z"/></symbol>
-  </svg>
-
-  <header class="site-header">
-    <div class="container wide">
-      <a class="logo" href="/"><img src="/images/logo.jpg" alt="" width="44" height="44">Van Anh Dao</a>
-      <button class="icon-btn menu-btn" aria-label="Mở menu" aria-expanded="false" aria-controls="nav">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
-      <nav class="nav" id="nav">
-        <a href="/mini-course">Mini-course</a>
-        <a href="/hoc-cung-minh">Học cùng mình</a>
-        <a href="/minh-lam">Mình làm</a>
-        <a href="/minh-choi">Mình chơi</a>
-        <a href="/gioi-thieu">Mình là ai?</a>
-        <button class="icon-btn" aria-label="Tìm kiếm">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.5-4.5"/></svg>
-        </button>
-      </nav>
-    </div>
-  </header>
+  <site-header></site-header>
 
   <main class="article narrow">
     <p class="status" id="status">Đang tải bài viết...</p>
@@ -136,46 +99,13 @@
 
       <nav class="course-nav reveal" id="course-nav" hidden></nav>
 
-      <aside class="share reveal">
-        <h2>Chia sẻ bài viết</h2>
-        <div class="socials">
-          <a href="#" data-share="facebook" target="_blank" rel="noopener" aria-label="Chia sẻ lên Facebook">
-            <svg width="20" height="20"><use href="#i-facebook"/></svg>
-          </a>
-          <a href="#" data-share="x" target="_blank" rel="noopener" aria-label="Chia sẻ lên X">
-            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.3L5.3 21H2.2l7.2-8.3L2 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.5l11.2 14.5z"/></svg>
-          </a>
-          <a href="#" data-share="linkedin" target="_blank" rel="noopener" aria-label="Chia sẻ lên LinkedIn">
-            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM3.3 9h3.4v11H3.3V9zm5.6 0h3.3v1.5c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.2 2.3 4.2 5.4V20h-3.4v-5.2c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V20H8.9V9z"/></svg>
-          </a>
-        </div>
-      </aside>
+      <share-buttons></share-buttons>
     </div>
   </main>
 
-  <section class="subscribe">
-      <div class="container wide">
-        <div>
-          <h2>Để không bỏ lỡ thông tin mới nhất từ mình!</h2>
-          <p>Khi nào có bài viết hoặc video mới (siêu hay), mình sẽ gửi đến bạn trước tiên</p>
-        </div>
-        <form>
-          <input type="text" name="name" placeholder="Tên của bạn" aria-label="Tên của bạn" required>
-          <input type="email" name="email" placeholder="Email" aria-label="Email" required>
-          <button type="submit">Đăng ký</button>
-        </form>
-      </div>
-  </section>
+  <site-subscribe></site-subscribe>
 
-  <footer class="site-footer">
-    <a class="logo" href="/"><img src="/images/logo.jpg" alt="" width="44" height="44">Van Anh Dao</a>
-    <div class="socials">
-      <a href="https://www.facebook.com/va.storii/" target="_blank" rel="noopener" aria-label="Facebook"><svg width="22" height="22"><use href="#i-facebook"/></svg></a>
-      <a href="https://www.youtube.com/@vanh.da0" target="_blank" rel="noopener" aria-label="YouTube"><svg width="22" height="22"><use href="#i-youtube"/></svg></a>
-      <a href="https://www.tiktok.com/@va.storii" target="_blank" rel="noopener" aria-label="TikTok"><svg width="20" height="20"><use href="#i-tiktok"/></svg></a>
-    </div>
-    <small>Copyright © 2025 Van Anh Dao</small>
-  </footer>
+  <site-footer></site-footer>
 
   <script src="/posts.js"></script>
   <script src="/courses.js"></script>
@@ -224,14 +154,7 @@
         source.href = post.substackUrl;
         source.textContent = post.title;
 
-        const url = encodeURIComponent(location.origin + location.pathname);
-        const text = encodeURIComponent(post.title);
-        const shareUrls = {
-          facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-          x: `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
-          linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-        };
-        document.querySelectorAll('[data-share]').forEach((a) => { a.href = shareUrls[a.dataset.share]; });
+        document.querySelector('share-buttons').render(post.title);
 
         status.remove();
         document.getElementById('post').hidden = false;
