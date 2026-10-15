@@ -22,7 +22,7 @@ const SITE = {
   socials: [
     { label: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/va.storii/' },
     { label: 'YouTube', icon: 'youtube', href: 'https://www.youtube.com/@vanh.da0' },
-    { label: 'TikTok', icon: 'tiktok', href: 'https://www.tiktok.com/@va.storii' },
+    { label: 'TikTok', icon: 'tiktok', href: 'https://www.tiktok.com/@vanh.da0' },
   ],
 };
 
